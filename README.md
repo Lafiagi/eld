@@ -34,7 +34,18 @@ A comprehensive full-stack application for generating FMCSA-compliant ELD (Elect
 
 ## Installation
 
-### Backend Setup
+### Quick Setup (Recommended)
+
+Run the automated setup script:
+```bash
+./scripts/setup.sh
+```
+
+This will set up both backend and frontend with all dependencies.
+
+### Manual Setup
+
+#### Backend Setup
 
 1. Navigate to the backend directory:
 ```bash
@@ -70,7 +81,7 @@ python manage.py runserver
 
 The backend will be available at `http://localhost:8000`
 
-### Frontend Setup
+#### Frontend Setup
 
 1. Navigate to the frontend directory:
 ```bash
@@ -88,6 +99,13 @@ npm run dev
 ```
 
 The frontend will be available at `http://localhost:3000`
+
+### Development Scripts
+
+- **Setup everything**: `./scripts/setup.sh`
+- **Start both servers**: `./scripts/dev.sh`
+- **Backend only**: `cd backend && source venv/bin/activate && python manage.py runserver`
+- **Frontend only**: `cd frontend && npm run dev`
 
 ## Project Structure
 

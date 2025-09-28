@@ -1,1 +1,24 @@
+# Django and REST Framework
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
 
+# Environment and Configuration
+python-decouple==3.8
+
+# HTTP Requests and APIs
+requests==2.31.0
+
+# Image Processing
+Pillow==10.1.0
+
+# PDF Generation
+reportlab==4.0.7
+
+# Task Queue (for background tasks)
+celery==5.3.4
+redis==5.0.1
+
+gunicorn==21.2.0
+whitenoise==6.6.0
+geopy==2.4.1
