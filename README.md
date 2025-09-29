@@ -187,16 +187,60 @@ The application implements comprehensive FMCSA Hours of Service rules:
 
 ## Deployment
 
-### Vercel Deployment
+### Production Deployment
 
-1. Connect your GitHub repository to Vercel
-2. Set environment variables:
-   - `VITE_API_URL`: Your backend API URL
-3. Deploy
+The application is configured for deployment under `/eld/` path on `api.ile-wa.com`:
 
-### Backend Deployment
+#### URLs
+- **Frontend**: `https://api.ile-wa.com/eld/`
+- **Backend API**: `https://api.ile-wa.com/eld/api/`
+- **Admin**: `https://api.ile-wa.com/eld/admin/`
 
-Deploy the Django backend to your preferred platform (Heroku, Railway, etc.) and update the `VITE_API_URL` environment variable.
+#### Apache Configuration
+The system is configured to work with your existing Apache VirtualHost:
+
+```apache
+# ELD System
+ProxyPass /eld/ http://127.0.0.1:8038/
+ProxyPassReverse /eld/ http://127.0.0.1:8038/
+Alias /eld/static/ /var/www/eld/backend/staticfiles/
+```
+
+#### Manual Deployment
+
+1. **Backend Setup**:
+   ```bash
+   # Deploy to /var/www/eld/backend
+   cd /var/www/eld/backend
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   python manage.py migrate
+   python manage.py collectstatic --noinput
+   gunicorn --bind 127.0.0.1:8038 eld_backend.wsgi:application
+   ```
+
+2. **Frontend Setup**:
+   ```bash
+   # Deploy to /var/www/eld/frontend
+   cd /var/www/eld/frontend
+   npm install
+   npm run build
+   ```
+
+3. **Service Management**:
+   ```bash
+   # Create systemd service for auto-start
+   sudo systemctl enable eld-backend
+   sudo systemctl start eld-backend
+   ```
+
+See `DEPLOYMENT.md` for detailed deployment instructions.
+
+### Development vs Production
+
+- **Development**: Frontend on port 3000, Backend on port 8000
+- **Production**: Backend on port 8038, served through Apache proxy under `/eld/` path
 
 ## Environment Variables
 
@@ -207,7 +251,7 @@ Deploy the Django backend to your preferred platform (Heroku, Railway, etc.) and
 - `ALLOWED_HOSTS`: Allowed host names for production
 
 ### Frontend
-- `VITE_API_URL`: Backend API URL (default: http://localhost:8000)
+- `VITE_API_URL`: Backend API URL (default: https://api.ile-wa.com/eld/api)
 
 ## Contributing
 

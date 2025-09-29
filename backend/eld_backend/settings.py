@@ -15,7 +15,13 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-your-secret-key-here'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'api.ile-wa.com',
+    '*.api.ile-wa.com',
+    '0.0.0.0',
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -110,6 +116,37 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
+# Specific CORS origins for production
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://api.ile-wa.com",
+    "https://eld-self.vercel.app",
+]
+
+# CORS headers
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# CORS methods
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
@@ -123,3 +160,6 @@ REST_FRAMEWORK = {
 # External API settings
 MAPBOX_ACCESS_TOKEN = config('MAPBOX_ACCESS_TOKEN', default='')
 OPENROUTE_API_KEY = config('OPENROUTE_API_KEY', default='')
+
+# Path prefix for deployment under /eld/
+FORCE_SCRIPT_NAME = '/eld'

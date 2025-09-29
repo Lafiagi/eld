@@ -12,11 +12,14 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://your-django-backend.herokuapp.com/api/$1"
+      "dest": "https://api.ile-wa.com/eld/api/$1"
     },
     {
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "VITE_API_URL": "https://api.ile-wa.com/eld/api"
+  }
 }

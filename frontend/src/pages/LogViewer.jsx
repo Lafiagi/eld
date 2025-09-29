@@ -166,7 +166,6 @@ const LogViewer = () => {
                   log={selectedLog} 
                   onTimeClick={(data) => {
                     console.log('Time clicked:', data);
-                    // You can add more interactive functionality here
                   }}
                 />
               </div>

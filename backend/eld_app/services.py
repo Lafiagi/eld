@@ -565,19 +565,6 @@ class ELDLogService:
     def _check_34_hour_restart(self, trip, log_date: datetime.date) -> Dict:
         """Check if 34-hour restart applies and reset cycle if needed"""
         
-        # FMCSA 34-hour restart rule:
-        # Driver must have 34 consecutive hours off-duty to reset the 70-hour/8-day cycle
-        
-        # Get the last 34 hours of duty statuses to check for consecutive off-duty time
-        thirty_four_hours_ago = datetime.combine(log_date, datetime.min.time()) - timedelta(hours=34)
-        
-        # This is a simplified check - in a real system, you'd query the database
-        # for duty statuses in the last 34 hours
-        # Simulate checking last 34 hours for consecutive off-duty time
-        # In a real implementation, this would query actual duty status records
-        
-        # For simulation purposes, assume we can check if there was a 34-hour restart
-        # In practice, this would require database queries of actual duty statuses
         has_34_hour_restart = False
         
         # Check if there was a 34-hour consecutive off-duty period
